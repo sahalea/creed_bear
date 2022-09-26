@@ -71,6 +71,10 @@ export const getUsersList = async (pageNumber, limit = 10, totalSize = 0) => {
   return await Promise.all([promiseData]).then((data) => data[0]);
 };
 
+export const fetchUsers = () => {
+  return users;
+};
+
 /**
  * Get all users using faker
  *
@@ -100,10 +104,10 @@ const listAllUsers = (pageNumber, limit, totalSize) => {
   };
 };
 
-const createUser = (email, firstName, lastName) => {
+export const createUser = (email, firstName, lastName) => {
   new Promise((resolve, reject) => {
-    const user = [
-      ...user,
+    users = [
+      ...users,
       {
         id: faker.datatype.uuid(),
         email: email,

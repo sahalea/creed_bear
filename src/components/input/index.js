@@ -1,4 +1,5 @@
-import React from "react";
+import { Input } from 'antd';
+import React from 'react';
 
 /**
  * Custom input filed
@@ -7,12 +8,20 @@ import React from "react";
  * @param {*} name, type, css, onChange
  * @returns
  */
-const CreedInput = ({ type = "text", name, value, css, onChange }) => (
-  <input
-    type={type}
+const CreedInput = ({
+  type = 'text',
+  placeholder,
+  name,
+  value,
+  css,
+  onChange,
+}) => (
+  <Input
+    size="medium"
     name={name}
     className={css}
     value={value}
+    placeholder={placeholder}
     onChange={(e) => onChange(e)}
   />
 );

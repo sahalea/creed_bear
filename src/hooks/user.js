@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { getUsersList } from "utils/api";
+import { fetchUsers, getUsersList } from "utils/api";
+import { useNavigate } from "react-router-dom";
+import { createUser } from "utils/api";
 
-const useUsers = () => {
+export const useGetUsers = async () => {
   const [usersList, setUsersList] = useState([]);
   const [pageConfig, setPageConfig] = useState({
     pageNumber: 1,
     limit: 10,
-    totalSize: usersList.length,
+    totalSize: 10,
   });
-
-  useEffect(() => {
-    getUsers();
-  }, []);
-
-  const getUsers = async () => {
+  useEffect(async () => {
     try {
       const result = await getUsersList();
       setUsersList(result.data);
@@ -24,11 +21,26 @@ const useUsers = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, []);
 
   return {
     usersList,
     pageConfig,
   };
 };
-export default useUsers;
+
+export const useSaveUser = async () => {
+  const [data, setData] = useState([]);
+  const create = async (values) => {
+    const response = await createUser(
+      values.email,
+      values.firstName,
+      values.lastName
+    );
+    if (response.status === "success") {
+      setData(fetchUsers());
+    }
+  };
+
+  return { data, create };
+};
