@@ -1,4 +1,5 @@
-import React from "react";
+import { Button } from 'antd';
+import React from 'react';
 
 /**
  * Custom action button
@@ -6,10 +7,16 @@ import React from "react";
  * @param {*} type, css, onChange
  * @returns
  */
-const CreedButton = ({ type = "primary", css, onClick, text, disabled }) => (
-  <button type={type} className={css} onClick={onClick} disabled={disabled}>
+const CreedButton = ({
+  type = 'primary',
+  css,
+  onClick,
+  text,
+  disabled = false,
+}) => (
+  <Button type={type} className={css} onClick={onClick} disabled={disabled}>
     {text}
-  </button>
+  </Button>
 );
 
 export default CreedButton;
